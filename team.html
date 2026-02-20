@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cey-Core Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button id="theme-toggle" class="theme-switcher">
+    <span id="theme-icon">🌙</span>
+</button>
+
+    <nav class="navbar">
+        <div class="logo">Cey-Core Studio</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa |</a></li>
+            <li><a href="team.html"> Ekibimiz </a></li>
+        </ul>
+    </nav>
+
+    <section class="team-intro" style="text-align: center; padding: 50px 10%; background-color: #0a0a0a;">
+    <h1 style="color: #7b2cbf; font-size: 2.5rem; margin-bottom: 20px;">Kurumsal Vizyonumuz</h1>
+    <p style="color: #cccccc; line-height: 1.8; font-size: 1.1rem;">
+       Geleceği Kodluyoruz.
+        Cey-Core Studio olarak, 
+        sadece oyun geliştirmiyor; 
+        oyuncularımızı yeni evrenlerin başrolü yapıyoruz. 
+        Q-Line Solutions çatısı altında,
+         yenilikçi teknolojileri estetik tasarımlarla 
+         birleştirerek dijital dünyaların sınırlarını zorlayan 
+         profesyonel bir kadroyla hizmet veriyoruz. 
+         Vizyonumuz, her pikselde tutku ve her satır kodda 
+         kaliteyi buluşturmaktır.
+    </p>
+</section>
+
+    <section class="team-grid">
+        <div class="team-card">
+            <img src="ceo.png" alt="CEO" class="member-img">
+            <div class="info-content">
+                <h3>Ceyda Ateş</h3>
+                <p>CEO</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="projeyoneticisi.png" alt="Proje Yöneticisi" class="member-img">
+            <div class="info-content">
+                <h3>Zeynep Öztürk</h3>
+                <p>Proje Yöneticisi</p>
+            </div>
+        </div>
+
+        <div class="team-card my-profile">
+            <img src="senior.png" alt="Senior Developer" class="member-img">
+            <div class="info-content">
+                <h3>Ceyda Ateşoğlu</h3>
+                <p>Lead Developer</p>
+                <img src="flexbox.png" alt="FlexFarm Sertifikası"
+                    style="width: 80px; margin-top: 5px; border: 1px solid gold;">
+                <p style="font-size: 10px; color: gold;">Onaylı Q-Line Geliştiricisi</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="developer.png" alt=" Senior Developer" class="member-img">
+            <div class="info-content">
+                <h3>Sümeyye Taş</h3>
+                <p>Senior Developer </p>
+            </div>    
+        </div>
+
+        <div class="team-card">
+            <img src="junior.png" alt="Junior Developer" class="member-img">
+            <div class="info-content">
+                <h3>Can Yılmaz</h3>
+                <p>Junior Developer</p>
+            </div>
+        </div>    
+
+        <div class="team-card">
+            <img src="stajyer.png" alt="Stajyer" class="member-img">
+            <div class="info-content">
+                <h3>Tarık Aydın</h3>
+                <p>Stajyer</p>
+
+            </div>
+        </div>
+
+    </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Cey-Core Studio</p>
+    </footer>
+</body>
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    //  Sayfa yüklendiğinde hafızayı kontrol et
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Varsayılan dark
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    //  Butona tıklandığında temayı değiştir
+    toggleBtn.addEventListener('click', () => {
+        let currentTheme = htmlElement.getAttribute('data-theme');
+        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Hafızaya kaydet
+        updateIcon(newTheme);
+    });
+
+    // İkonu temaya göre güncelleme fonksiyonu
+    function updateIcon(theme) {
+        toggleBtn.innerHTML = theme === 'dark' ? '🌙' : '☀️';
+    }
+</script>
+
+</html>

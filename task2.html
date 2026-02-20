@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paketler | Cey-Core Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="theme-toggle" class="theme-switcher">
+    <span id="theme-icon">🌙</span>
+</button>
+
+    <div class="main-container">
+
+        <header class="page-header">
+            <h1>   Paket Seçeneklerimiz</h1>
+            <p>    Oyun evrenine girmek için ihtiyacınıza en uygun planı seçin.</p>
+        </header>
+
+        <div class="pricing-wrapper">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Temel</h3>
+                    <div class="price-box">
+                        <span class="currency">₺</span>
+                        <span class="amount">0</span>
+                        <span class="period">/ay</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Temel topluluk erişimi.</li>
+                        <li>Demo oyunlar.</li>
+                        <li>Temel Destek.</li>
+                       
+                        <li class="disabled">Oyun Kaydı Yok.</li>
+                        <li class="disabled">Oyuncu Analizi Yok.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn">Ücretsiz Dene</a>
+                </div>
+            </div>
+
+            <div class="card popular">
+                <div class="badge"></div> 
+                
+                <div class="card-header">
+                    <h3>Profesyonel</h3>
+                    <div class="price-box">
+                        <span class="currency">₺</span>
+                        <span class="amount">399</span>
+                        <span class="period">/ay</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Tüm kütüphaneye erişim.</li>
+                        <li>Erken erişim hakları.</li>
+                        <li>7/24 E-Posta Desteği.</li>
+                        <li>Ücretsiz destek.</li>
+                        <li>Haftalık Yedekleme.</li>
+                        <li class="disabled">Oyuncu Analizi Yok.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Hemen Başla</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Kurumsal</h3>
+                    <div class="price-box">
+                        <span class="currency">₺</span>
+                        <span class="amount">999</span>
+                        <span class="period">/ay</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Özel DLC'ler.</li>
+                        <li>Beta testleri.</li>
+                        <li>7/24 Canlı Destek.</li>
+                        <li>Fiziksel hediyeler.</li>
+                        <li>Günlük Yedekleme.</li>
+                        <li>Gelişmiş Oyuncu Analizi.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn">İletişime Geç</a>
+                </div>
+            </div>
+
+        </div> <div class="back-link">
+            <a href="index.html">← Ana Sayfaya Dön</a>
+        </div>
+
+    </div> 
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    //  Sayfa yüklendiğinde hafızayı kontrol et
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Varsayılan dark
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    //  Butona tıklandığında temayı değiştir
+    toggleBtn.addEventListener('click', () => {
+        let currentTheme = htmlElement.getAttribute('data-theme');
+        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Hafızaya kaydet
+        updateIcon(newTheme);
+    });
+
+    // İkonu temaya göre güncelleme fonksiyonu
+    function updateIcon(theme) {
+        toggleBtn.innerHTML = theme === 'dark' ? '🌙' : '☀️';
+    }
+</script></body>
+</html>

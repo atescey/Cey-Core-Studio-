@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ceycore Studio - Teklif Al</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <button id="theme-toggle" class="theme-switcher">
+    <span id="theme-icon">🌙</span>
+</button>
+
+<div class="offer-container">
+    <h2>Oyun Projesi Maliyet Hesapla</h2>
+    <p>Hayalindeki oyun için özellikleri seç, anında fiyat teklifi al.</p>
+    <hr>
+
+    <div class="input-group">
+        <label for="oyunSayisi">Oyun Sayısı</label>
+        <input type="number" id="oyunSayisi" value="1" min="1">
+    </div>
+
+    <div class="input-group">
+        <label for="kalite">Görüntü Kalitesi:</label>
+        <select id="kalite">
+            <option value="pixel">Pixel Art (Ekonomik)</option>
+            <option value="lowpoly">Stylized Low Poly (Standart)</option>
+            <option value="realistic">Ultra Realistic (Premium)</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+    <label for="boyut">Görsel Teknoloji:</label>
+    <select id="boyut">
+        <option value="2D">2D (İki Boyutlu)</option>
+        <option value="3D">3D (Üç Boyutlu)</option>
+    </select>
+</div>
+
+    <div class="input-group">
+        <label for="bolumSayisi">Bölüm (Level) Sayısı:</label>
+        <input type="number" id="bolumSayisi" value="1" min="1">
+    </div>
+
+    <div class="input-group">
+        <input type="checkbox" id="destek">
+        <label style="display:inline;" for="destek">Teknik Destek İstiyorum</label>
+    </div>
+
+    <button onclick="teklifHesapla()" class="btn">Fiyatı Hesapla</button>
+
+    <div class="result-box">
+        <p id="fiyatGosterge">Tahmini Tutar: 0 TL</p>
+    </div>
+</div>
+
+<script src="logic.js"></script>
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    //  Sayfa yüklendiğinde hafızayı kontrol et
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Varsayılan dark
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    //  Butona tıklandığında temayı değiştir
+    toggleBtn.addEventListener('click', () => {
+        let currentTheme = htmlElement.getAttribute('data-theme');
+        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Hafızaya kaydet
+        updateIcon(newTheme);
+    });
+
+    // İkonu temaya göre güncelleme fonksiyonu
+    function updateIcon(theme) {
+        toggleBtn.innerHTML = theme === 'dark' ? '🌙' : '☀️';
+    }
+</script>
+
+</body>
+</html>

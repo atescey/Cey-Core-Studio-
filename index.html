@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cey-Core Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button id="theme-toggle" aria-label="Tema Değiştir">
+    🌙
+</button>
+    <header class="hero-container">
+        <div class="hero-content">
+            <h1>Yeni Evrenleri Keşfet</h1>
+            <p>Cey-Core Studio olarak sınırları zorlayan oyunlar geliştiriyoruz.</p>
+            <button class="hero-btn">Hemen Oyna</button>
+        </div>
+        <div class="hero-visual">
+            <img src="anarobot.png" alt="Hero Character">
+            <div class="visual-overlay"></div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="logo">Cey-Core Studio</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa | </a></li>
+            <li><a href="team.html"> Ekibimiz | </a></li>
+            <li><a href="teklif.html">Fiyat Teklifi Al</a></li>
+        
+        </ul>
+    </nav>
+
+    <section class="games-section">
+        <h2>Geliştirdiğimiz Dünyalar</h2>
+        <div class="games-grid">
+            <div class="game-item">
+                <img src="chronos.png" alt="Project Chronos">
+                <div class="game-info">
+                    <h3>Project: Chronos</h3>
+                    <p>Zamanın ötesinde bir macera.</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <img src="echos.png" alt="Realm of Echos">
+                <div class="game-info">
+                    <h3>Realm of Echos</h3>
+                    <p>Gizemli yankıların peşinde.</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <img src="artifact.png" alt="The Last Artifact">
+                <div class="game-info">
+                    <h3>The Last Artifact</h3>
+                    <p>Efsanevi kalıntıyı koru.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="task2.html">Paket Fiyatlarını Gör</a>
+    </footer>
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    //  Sayfa yüklendiğinde hafızayı kontrol et
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Varsayılan dark
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    //  Butona tıklandığında temayı değiştir
+    toggleBtn.addEventListener('click', () => {
+        let currentTheme = htmlElement.getAttribute('data-theme');
+        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Hafızaya kaydet
+        updateIcon(newTheme);
+    });
+
+    // İkonu temaya göre güncelleme fonksiyonu
+    function updateIcon(theme) {
+        toggleBtn.innerHTML = theme === 'dark' ? '🌙' : '☀️';
+    }
+</script>
+</body>
+
+</html>

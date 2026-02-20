@@ -1,0 +1,495 @@
+/* RENK DEĞİŞKENLERİ - Karanlık ve Aydınlık Mod Temeli */
+:root {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --navbar-bg: #000000;
+    --card-bg: #1e1e1e;
+    --hero-bg: #0a0a0a;
+    --accent-color: #7b2cbf;
+    --accent-hover: #9d4edd;
+    --border-color: #333333;
+    --text-main: #ffffff;  /* Ana başlıklar için */
+    --text-sub: #cccccc;   /* Alt metinler/paragraflar için */
+
+}
+
+/* Aydınlık Mod Değişkenleri (JavaScript tetiklediğinde aktif olur) */
+[data-theme="light"] {
+    --bg-color: #f5f5f5;
+    --text-color: #1a1a1a;
+    --navbar-bg: #ffffff;
+    --card-bg: #ffffff;
+    --hero-bg: #e9e9e9;
+    --border-color: #dddddd;
+    --text-main: #1a1a1a;  /* Aydınlık modda siyahımsı */
+    --text-sub: #444444;   /* Aydınlık modda koyu gri */
+}
+
+/* Yumuşak Geçiş Efekti (Tüm sayfa için) */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-color); 
+    color: var(--text-color);
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Daha modern bir font */
+    padding-top: 80px; 
+}
+
+/* Navbar Düzeni: Elemanları yan yana dizmek için Flexbox kullanıldı */
+.navbar {
+    display: flex; 
+    justify-content: space-between;
+    padding: 20px;
+    background: var(--navbar-bg); /* Değişken kullanıldı */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+    display: flex; /* Linkleri yan yana dizmek için */
+    list-style: none;
+}
+
+/* HERO ALANI: Görseldeki gibi yan yana dizilim */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--hero-bg); /* Değişken kullanıldı */
+    min-height: 500px;
+    padding: 40px 8%;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1; /* Sol tarafın alanı kaplaması */
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    color: var(--text-main);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    max-width: 450px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* "Hemen Oyna" Butonu Stili */
+.hero-btn {
+    background-color: #7b2cbf; /* Cey-Core Moru */
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background-color: #9d4edd;
+    box-shadow: 0 0 15px rgba(123, 44, 191, 0.6);
+}
+
+/* SAĞ TARAF: Görsel ve Işık Efekti */
+.hero-visual {
+    flex: 1.2; /* Görsel alanını biraz daha geniş tutuyoruz */
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-visual img {
+    max-width: 90%; /* Görselin devasa olmasını engeller */
+    height: auto;
+    mask-image: linear-gradient(to left, black 70%, transparent 100%); /* Görselin metne doğru yumuşakça silinmesi */
+    -webkit-mask-image: linear-gradient(to left, black 70%, transparent 100%);
+}
+
+/* Görseldeki mor parlamayı simüle eden gölge */
+.visual-overlay {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(123, 44, 191, 0.3) 0%, transparent 70%);
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+/* Mobilde görseldeki gibi düzenin bozulmamasını sağlamak için; */
+@media (max-width: 992px) {
+    .hero-container {
+        flex-direction: column; /* linklerin otomatik olarak alt alta dizilmesini sağlama */
+        text-align: center;
+        padding-top: 80px;
+    }
+    .hero-content { margin-bottom: 40px; }
+    .hero-visual { justify-content: center; }
+}
+
+/* Ana kapsayıcıyı Flexbox yaparak kartları yan yana dizme */
+.pricing-wrapper {
+    display: flex; /* Kartları yan yana getirmek için */
+    justify-content: center; /* Kartları yatayda ortalar */
+    align-items: stretch; /* Kart boylarını eşitler */
+    gap: 25px; /* Kartlar arası boşluk */
+    flex-wrap: wrap; /* Mobilde kartların alt alta görünmesini sağlar */
+    padding: 40px 20px;
+}
+
+/* Kartların tasarımı */
+.card {
+    background-color: var(--card-bg); /* Değişken kullanıldı */
+    border: 1px solid var(--accent-color); 
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Popüler (Profesyonel) kartı daha beirgin yapmak için */
+.card.popular {
+    border-color: #9d4edd;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+    transform: scale(1.05); /* Diğerlerinden biraz daha büyük görünsün diye */
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(123, 44, 191, 0.6);
+}
+
+/* Liste elemanlarını (Özellikleri) düzenleme */
+.card-body ul {
+    list-style: none; /* Noktaları kaldırır */
+    padding: 0;
+    margin: 20px 0;
+    text-align: left; /* Özellikleri sola yasla */
+}
+
+.card-body li {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+
+.card-body li.disabled {
+   color: var(--text-sub); 
+    text-decoration: line-through;
+}
+
+/* Buton Tasarımı */
+.btn {
+    display: block;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #7b2cbf;
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: auto;
+}
+
+.btn-primary {
+    background-color: #7b2cbf;
+}
+
+/* MOBİL UYUM */
+@media (max-width: 768px) {
+    .pricing-wrapper {
+        flex-direction: column; /* Mobilde kartları dikey dizmek için */
+        align-items: center;
+    }
+    .card.popular {
+        transform: scale(1); /* Mobilde büyütmeyi iptal etmek için */
+    }
+}
+
+/* OYUNLAR GRID YAPISI */
+
+.games-section {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.games-section h2 {
+    color: #7b2cbf;
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+/* CSS Grid Kullanımı: Masaüstünde 3 sütunlu yapı */
+.games-grid {
+    display: grid; /* Izgara modeli */
+    grid-template-columns: repeat(3, 1fr); /* 3 eşit genişlikte sütun oluşturmak için */
+    gap: 30px; /* Elemanlar arası boşluk oluşturmak için */
+}
+
+.game-item {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden; /* Resmin köşelerden taşmaması için */
+    border: 1px solid #3c096c;
+    transition: transform 0.3s ease;
+}
+
+.game-item:hover {
+    transform: scale(1.03);
+    border-color: #7b2cbf;
+}
+
+.game-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.game-info {
+    padding: 20px;
+}
+
+.game-info h3 {
+    margin: 0 0 10px 0;
+    color: #9d4edd;
+}
+
+/* Tablet ve Mobil Uyumu */
+@media (max-width: 992px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 80px;
+    }
+    .hero-content { margin-bottom: 40px; }
+    .hero-visual { justify-content: center; }
+
+    /* Navigasyon linkleri için ekleme */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        gap: 10px; /* Linkler arası birazcık boşluk */
+    }
+}
+
+@media (max-width: 600px) {
+    .games-grid {
+        grid-template-columns: 1fr; /* Mobilde tek sütun olması için */
+    }
+}
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+/* EKİP ALANI DÜZENİ (FLEXBOX) */
+.team-grid {
+    display: flex;             /* Kartları yan yana dizer */
+    justify-content: center;   /* Kartları yatayda ortalamak için */
+    gap: 25px;                 /* Kartlar arası boşluk için */
+    flex-wrap: wrap;           /* Mobilde alt alta geçmesini sağlar */
+    padding: 50px 20px;
+}
+
+/* PERSONEL KARTI ANA YAPISI */
+.team-card {
+    position: relative;        /* İçindeki elementleri konumlandırmak için */
+    width: 280px;
+    height: 380px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 15px;
+    overflow: hidden;          /* Taşan içeriği (alttaki bilgileri) gizler */
+    transition: transform 0.4s ease-in-out; /* Kartın genel geçiş hızı için */
+    cursor: pointer;
+}
+
+/* Karta gelince hafif büyüme efekti */
+.team-card:hover {
+    transform: scale(1.03);    /* Mouse gelince %3 büyütür  */
+    border-color: #7b2cbf;     /* Kenarlığı mor yapar */
+}
+
+/* PERSONEL RESMİ */
+.member-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out; /* Kayma efekti hızı */
+}
+
+/* SLIDE UP: Mouse gelince resmi yukarı kaydırır  */
+.team-card:hover .member-img {
+    transform: translateY(-30%); /* Resmi %30 yukarı iter */
+}
+
+/* BİLGİ PANELİ (ALTTAN ÇIKAN KISIM) */
+.info-content {
+    position: absolute;
+    bottom: -100%;            
+    left: 0;
+    width: 100%;
+    height: 45%;               
+    background: linear-gradient(transparent, #7b2cbf); /* mor geçiş */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: bottom 0.5s ease-in-out; /* Yukarı çıkış hızı  */
+    z-index: 2;                /* Resmin üstünde görünmesini sağlar */
+}
+
+/* Mouse gelince panel yukarı çıkar */
+.team-card:hover .info-content {
+    bottom: 0;                 /* Paneli kartın içine çeker */
+}
+
+/* Yazı Stilleri */
+.info-content h3 { margin: 0; color: white; font-size: 1.2rem; }
+.info-content p { margin: 5px 0; color: #ddd; font-size: 0.9rem; }
+
+/* --- TASK 4.1: SMART QUOTE MODULE STYLES --- */
+
+.offer-container {
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 40px;
+    background: #121212; 
+    border: 1px solid #333;
+    border-radius: 20px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.offer-container h2 {
+    color: #7b2cbf; /* Oyun stüdyosu rengi */
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.input-group input[type="number"],
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease; 
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color:  #7b2cbf; /* Odaklanınca renk değişimi için */
+}
+
+/* Checkbox kısmı için */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #7b2cbf;
+}
+
+/* Hesapla Butonu için */
+.btn-calculate {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg,  #7b2cbf, #0099ff);
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+
+.btn-calculate:hover {
+    transform: translateY(-3px); /* Hover efekti için */
+    box-shadow: 0 5px 15px  #7b2cbf;
+}
+
+/* Sonuç Alanı */
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px dashed #7b2cbf;
+}
+
+#fiyatGosterge {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color:  #7b2cbf;
+    margin-top: 10px;
+}
+
+#theme-toggle {
+    position: fixed;        /* Sayfaya sabitle */
+    top: 20px;              /* Üstten boşluk */
+    right: 20px;            /* Sağdan boşluk */
+
+    background: none;       
+    border: none;           /* Kenarlığı kaldır */
+    padding: 0;
+
+    font-size: 32px;        /* Emoji boyutu */
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+#theme-toggle:focus {
+    outline: none;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.15);
+    transition: 0.2s ease;
+}
