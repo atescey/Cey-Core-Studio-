@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Cey-Core | Robot Generator</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <a href="index.html" style="color: var(--accent-color); margin-bottom: 20px; text-decoration: none; font-weight: bold;">← ANA SİTEYE DÖN</a>
+        
+        <div class="character-card">
+            <div class="avatar-box">
+                <img id="charAvatar" src="https://robohash.org/ceycore?set=set1" alt="Robot Character">
+            </div>
+            <h2 id="charName">Robot Ünitesi</h2>
+            <p id="charClass" style="color: var(--accent-hover); font-weight: bold;">MODEL: BEKLEMEDE</p>
+            
+            <div class="stats">
+                <div>GÜÇ (STR): <div class="stat-bar"><div id="strBar" class="stat-fill"></div></div></div>
+                <div style="margin-top:10px">HIZ (SPD): <div class="stat-bar"><div id="spdBar" class="stat-fill"></div></div></div>
+                <div style="margin-top:10px">ZEKA (INT): <div class="stat-bar"><div id="intBar" class="stat-fill"></div></div></div>
+            </div>
+
+            <button class="hero-btn" onclick="generateRobot()" style="width: 100%;">YENİ ÜNİTE ÜRET</button>
+        </div>
+    </div>
+
+    <script>
+        const robotNames = ["RX-700", "CyberTron", "Bolt-Z", "Aegis-One", "Neon-Pulse", "Titan-Core", "Byte-Walker", "Zenith-V"];
+        const robotClasses = ["Büyücü-Bot (Nano)", "Siber Okçu", "Zırhlı Tank", "Suikastçı-Droid", "Tamirci-Ünite", "Gözcü-Robot"];
+
+        function generateRobot() {
+            // Rastgele veriler
+            const randomName = robotNames[Math.floor(Math.random() * robotNames.length)];
+            const randomClass = robotClasses[Math.floor(Math.random() * robotClasses.length)];
+            const str = Math.floor(Math.random() * 100) + 1;
+            const spd = Math.floor(Math.random() * 100) + 1;
+            const int = Math.floor(Math.random() * 100) + 1;
+            
+            // Robot API (set=set1 robotlar içindir)
+            const randomSeed = Math.random();
+            const avatarImg = document.getElementById('charAvatar');
+            
+            // Görseli değiştir
+            avatarImg.src = `https://robohash.org/${randomSeed}?set=set1`;
+
+            // Metinleri ve barları güncelle
+            document.getElementById('charName').innerText = randomName;
+            document.getElementById('charClass').innerText = "MODEL: " + randomClass;
+            
+            // Barları güncelle (Küçük gecikme ile animasyon daha iyi görünür)
+            setTimeout(() => {
+                document.getElementById('strBar').style.width = str + "%";
+                document.getElementById('spdBar').style.width = spd + "%";
+                document.getElementById('intBar').style.width = int + "%";
+            }, 100);
+        }
+
+        // Sayfa açıldığında otomatik bir tane üret
+        window.onload = generateRobot;
+    </script>
+</body>
+</html>
